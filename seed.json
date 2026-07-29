@@ -1,12 +1,13 @@
 {
-  "field_name": "Mechanistic Interpretability",
+  "field_name": "Your Subfield Name",
   "search_terms": [
-    "mechanistic interpretability",
-    "sparse autoencoders language models",
-    "circuit analysis neural networks"
+    "first search phrase",
+    "second search phrase",
+    "third search phrase"
   ],
   "seed_dois": [
-    "10.48550/arXiv.2209.10652",
+    "10.1016/j.nanoen.2021.106000",
+    "10.1038/s41563-020-00900-4",
     "10.48550/arXiv.2301.05217"
   ]
 }
