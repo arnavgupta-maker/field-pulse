@@ -1,13 +1,15 @@
 {
-  "field_name": "Your Subfield Name",
+  "field_name": "Labor Economics and Automation",
   "search_terms": [
-    "first search phrase",
-    "second search phrase",
-    "third search phrase"
+    "labor market impacts automation",
+    "technological change employment wages",
+    "artificial intelligence productivity labor",
+    "task model automation inequality"
   ],
   "seed_dois": [
-    "10.1016/j.nanoen.2021.106000",
-    "10.1038/s41563-020-00900-4",
-    "10.48550/arXiv.2301.05217"
+    "10.48550/arXiv.2303.10130",
+    "10.1086/705716",
+    "10.1162/003355303322552801",
+    "10.3386/w31161"
   ]
 }
