@@ -27,7 +27,7 @@ OUTPUT_DIR = "digests"
 TOP_N = 5                        # how many papers to include per digest
 LOOKBACK_DAYS = 2                # how many days back counts as "new"
 MODEL_NAME = "all-MiniLM-L6-v2"  # local, free embedding model
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-3.5-flash"
 CONTACT_EMAIL = "you@example.com"  # any email; OpenAlex gives faster, more reliable responses to identified requests — a courtesy header, not a login
 
 # ---------- SETUP ----------
