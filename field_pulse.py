@@ -144,8 +144,7 @@ given the papers they already follow - not a generic summary of the abstract.
 If it's genuinely minor or off-topic, say so plainly instead of overselling it."""
 
     # Models to try in order if Google's servers return a 503 error
-    models_to_try = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
-
+models_to_try = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.1-flash-lite"]
     for model_name in models_to_try:
         for attempt in range(3):
             try:
