@@ -1,0 +1,39 @@
+name: Daily Field Pulse
+
+on:
+  schedule:
+    # 02:30 UTC = 08:00 IST. Cron is always UTC — see the README for how
+    # to adjust this if you want it ready at a different local time.
+    - cron: "30 2 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build-digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Field Pulse
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python field_pulse.py
+
+      - name: Commit and push the new digest
+        run: |
+          git config user.name "field-pulse-bot"
+          git config user.email "actions@github.com"
+          git add docs data
+          git diff --quiet --cached || git commit -m "Daily digest: $(date -u +%Y-%m-%d)"
+          git push
