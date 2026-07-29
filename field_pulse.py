@@ -213,7 +213,7 @@ def main():
         note = summarize_relevance(seed["field_name"], seed_titles, p.get("title"), abstract)
         entries.append((score, p, note))
 
-    out_path = os.path.join(OUTPUT_DIR, f"{datetime.date.today().isoformat()}.html")
+    out_path = "docs/index.html"
     build_html(seed["field_name"], entries, out_path)
     mark_seen(conn, entries)
 
