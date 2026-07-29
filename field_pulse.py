@@ -129,6 +129,9 @@ def rank_new_papers(papers, centroid, conn):
 
 
 def summarize_relevance(field_name, seed_titles, paper_title, paper_abstract):
+    import time
+    from google.genai import errors
+
     prompt = f"""You help a researcher working on: {field_name}.
 Papers they already care about: {"; ".join(t for t in seed_titles if t)}.
 
@@ -137,10 +140,28 @@ Title: {paper_title}
 Abstract: {paper_abstract}
 
 In 2 concise sentences, explain specifically why this new paper matters
-given the papers they already follow — not a generic summary of the abstract.
+given the papers they already follow - not a generic summary of the abstract.
 If it's genuinely minor or off-topic, say so plainly instead of overselling it."""
-    resp = gemini_client.models.generate_content(model=GEMINI_MODEL, contents=prompt)
-    return resp.text.strip()
+
+    # Models to try in order if Google's servers return a 503 error
+    models_to_try = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
+
+    for model_name in models_to_try:
+        for attempt in range(3):
+            try:
+                resp = gemini_client.models.generate_content(
+                    model=model_name, 
+                    contents=prompt
+                )
+                return resp.text.strip()
+            except errors.APIError as e:
+                print(f"API busy for {model_name} (attempt {attempt + 1}): {e}")
+                time.sleep(2 ** attempt)
+            except Exception as e:
+                print(f"Error with {model_name}: {e}")
+                break
+
+    raise RuntimeError("All Gemini model attempts failed.")
 
 
 def build_html(field_name, entries, out_path):
